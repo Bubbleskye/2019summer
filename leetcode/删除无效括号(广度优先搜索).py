@@ -37,9 +37,10 @@ def removeInvalidParentheses(s):
         if left_p == 0 and right_p == 0 and isValid(tmp_s):
             res.add(tmp_s)
         for i in range(len(tmp_s)):
-            # 为字母时候
             if tmp_s[i] not in "()":
+                # 为字母时候
                 continue
+            # 找到所有删除后可能的结果，一个一个删除
             if tmp_s[i] == "(" and left_p > 0:
                 # 删除这个括号
                 t = tmp_s[:i] + tmp_s[i + 1:]
