@@ -24,7 +24,7 @@ class Trie:
         Returns if the word is in the trie.
         """
         test = self.dict
-        for alpha in (word):
+        for alpha in word:
             if alpha not in test:
                 return False
             test = test[alpha]

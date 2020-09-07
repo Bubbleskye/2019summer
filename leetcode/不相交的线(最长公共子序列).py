@@ -10,5 +10,5 @@ def maxUncrossedLines(A, B):
             if A[i] == B[j]:
                 dp[i + 1][j + 1] = dp[i][j] + 1
             else:
-                dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1], dp[i-1][j-1])
+                dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1], dp[i][j])
     return dp[-1][-1]

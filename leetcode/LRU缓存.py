@@ -1,3 +1,7 @@
+# 最近最少使用缓存 该缓存会删除最近最少使用的项目。使用之后就放到链表头部。
+# 数据结构是:字典里面储存key对应的value是一个链表节点,链表节点中存有key,value,before,next,所以是一个双向链表
+# dict[key]找到value,是一个链表节点.dict[key].key是节点中再次储存的key .value是值
+
 class ListNode:
     def __init__(self, key, val):
         self.key = key
@@ -69,7 +73,3 @@ class LRUCache:
             newnode.before = self.head
             self.head.next = newnode
             backnode.before = newnode
-
-
-#数据结构是:字典里面储存key对应的value是一个链表节点,链表节点中存有key,value,before,next,所以是一个双向链表
-# dict[key]找到value,是一个链表节点.dict[key].key是节点中再次储存的key .value是值

@@ -1,14 +1,16 @@
+# 最不经常使用（LFU）缓存算法
 # 基本数据结构：
 # 字典，键为key，值为key对应链表中的节点node，即key:node
 # 双向链表，自定义一个双链表节点dlNode类，其中
 # 链表数据为一个列表，包括[key, value, cnt]，其中key和value分别为缓存中key和value，cnt用于记录被访问的次数，默认初始cnt = 0
 # 链表指针包括前指针pre和后指针nxt，即双向链表
-# 维护链表节点顺序按照访问次数的降序排列，即访问次数越大越靠前、访问次数相同情况下越"新"越靠前
+
+# 维护链表节点顺序按照访问次数的降序排列，即访问次数越大越靠前，访问次数相同情况下越"新"越靠前
 # 进而，缓存已满需删除链表节点时，删除的是尾节点
 
 class dlNode:
     def __init__(self, key, val, cnt=0):
-        self.val = [key, val, cnt]#键、值、访问次数
+        self.val = [key, val, cnt]#键、值、访问次数构成的列表
         self.pre = None
         self.nxt = None
 
@@ -22,12 +24,14 @@ class LFUCache:
         self.head.nxt = self.tail
         self.tail.pre = self.head
 
-    def _refresh(self, node, cnt):#辅助函数，对节点node，以访问次数cnt重新定义其位置
+    def _refresh(self, node, cnt):
+        #辅助函数，对节点node，以访问次数cnt重新定义其位置
         pNode, nNode = node.pre, node.nxt #当前节点的前后节点
         if cnt < pNode.val[2]:#如果访问次数小于前节点的访问次数，无需更新位置
             return
         pNode.nxt, nNode.pre = nNode, pNode#将前后连起来，跳过node位置
-        while cnt >= pNode.val[2]:#前移到尽可能靠前的位置后插入
+        while cnt >= pNode.val[2]:
+            # 向前找，找到大于现在访问次数的点，所以相同访问次数情况下，越新更新的越靠前
             pNode = pNode.pre
         nNode = pNode.nxt
         pNode.nxt = nNode.pre = node
@@ -59,4 +63,5 @@ class LFUCache:
             node.pre, node.nxt = self.tail.pre, self.tail
             self.tail.pre.nxt, self.tail.pre = node, node
             self.cache[key] = node
+            # 刷新位置
             self._refresh(node, 0)

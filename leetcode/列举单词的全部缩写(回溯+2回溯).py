@@ -12,7 +12,7 @@
 word="word"
 ans = []
 def backtrace(i,cur, cnt):
-    # cnt是第i个字符前有多少个数字
+    # 索引i 此时的字符cur i之前计数cnt
     if i == len(word):
         # 走到字符的末尾,加入结果中
         if cnt > 0:

@@ -8,11 +8,11 @@ heap=[1]
 count=0
 while count<n:
     tmp=heapq.heappop(heap)
+    count = count + 1
     if tmp*2 not in heap:
          heapq.heappush(heap,tmp*2)
     if tmp*3 not in heap:
         heapq.heappush(heap,tmp*3)
     if tmp*5 not in heap:
         heapq.heappush(heap,tmp*5)
-    count=count+1
 print(tmp)

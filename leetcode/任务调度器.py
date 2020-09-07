@@ -17,15 +17,18 @@ def leastInterval(tasks, n):
     # 出现最多次任务的次数
     max_task_count = task_sort[0][1]
     # 至少需要的最短时间
-    res = (max_task_count - 1) * (n + 1)
+    res = (max_task_count - 1) * (n + 1)+1
 
-    for sort in task_sort:
+    for i in range(1,len(task_sort)):
+        sort=task_sort[i]
         if sort[1] == max_task_count:
             res += 1
 
     # 如果结果比任务数量少，则返回总任务数
 
     if res >= length:
+        # 任务桶没有填满
         return res
     else:
+        # 任务桶填满了
         return length

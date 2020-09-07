@@ -1,5 +1,4 @@
 # 中心对称数是指一个数字在旋转了 180 度之后看起来依旧相同的数字（或者上下颠倒地看）。
-#
 # 找到所有长度为 n 的中心对称数。
 #
 # 示例 :
@@ -21,6 +20,7 @@ def findStrobogrammatic(n):
     output = []
 
     def backtrack(s, count):
+        # 从中间向两边生成数字
         if len(s) == count and s[0] != "0":
             output.append(s)
         if len(s) < count:

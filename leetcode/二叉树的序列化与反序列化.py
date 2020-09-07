@@ -5,34 +5,32 @@
 #         self.right = None
 
 class Codec:
-
     def serialize(self, root):
         """Encodes a tree to a single string.
 
         :type root: TreeNode
         :rtype: str
         """
-        from collections import deque
-        if not root:
-            return []
         res = []
-        queue = deque([root])
+        if not root:
+            return res
+        from collections import deque
+        queue = deque()
+        queue.append(root)
+        res.append(root.val)
         while queue:
             for _ in range(len(queue)):
-                tmp = queue.popleft()
-                if tmp != "null":
-                    res.append(tmp.val)
-                    if tmp.left:
-                        queue.append(tmp.left)
-                    else:
-                        queue.append("null")
-                    if tmp.right:
-                        queue.append(tmp.right)
-                    else:
-                        queue.append("null")
+                node = queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                    res.append(node.left.val)
                 else:
                     res.append("null")
-
+                if node.right:
+                    queue.append(node.right)
+                    res.append(node.right.val)
+                else:
+                    res.append("null")
         return res
 
     def deserialize(self, data):
@@ -41,30 +39,25 @@ class Codec:
         :type data: str
         :rtype: TreeNode
         """
-        length = len(data)
-        if not length:
+        if len(data) == 0:
             return None
-        # 两个列表分别存放parents和child
         root = TreeNode(data[0])
-        parents = [root]
-        childs = []
+        from collections import deque
+        queue = deque()
+        queue.append(root)
         i = 1
-        while i < length:
-            for parent in parents:
-                if i < length and data[i] is not None:
-                    node = TreeNode(data[i])
-                    parent.left = node
-                    childs.append(node)
-                i += 1
-                # 加左节点
-                if i < length and data[i] is not None:
-                    node = TreeNode(data[i])
-                    parent.right = node
-                    childs.append(node)
-                i += 1
-            #     加右节点
-
-            if childs:
-                parents = childs
-                childs = []
+        while queue and i < len(data):
+            node = queue.popleft()
+            if data[i] != "null":
+                node.left = TreeNode(data[i])
+                queue.append(node.left)
+            else:
+                node.left = None
+            i = i + 1
+            if data[i] != "null":
+                node.right = TreeNode(data[i])
+                queue.append(node.right)
+            else:
+                node.right = None
+            i = i + 1
         return root
