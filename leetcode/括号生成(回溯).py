@@ -4,7 +4,7 @@ def generateParenthesis(n):
     def backtrack(res, left, right, n):
         if left == n and right == n:
             output.append(res)
-            return output
+            return
         if left < n:
             backtrack(res + '(', left + 1, right, n)
         if right < left:
@@ -12,3 +12,5 @@ def generateParenthesis(n):
 
     backtrack('', 0, 0, n)
     return output
+
+print(generateParenthesis(2))

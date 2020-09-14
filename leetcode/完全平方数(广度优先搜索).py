@@ -44,7 +44,7 @@
 # print(dp[n])
 # 超时__动态规划__dp[pow(j,2)]+dp[i-pow(j,2)]
 
-# 广度优先遍历
+# 最短路径——广度优先遍历
 from collections import deque
 import numpy as np
 n=12
@@ -61,9 +61,9 @@ while queue:
         # pop()抛出最后一个元素
         for i in range(1, int(np.sqrt(tmp))+1):
             x = tmp - pow(i,2)
-            if (x == 0):
+            if x == 0:
                 print(step)
-            if (x not in visited):
+            if x not in visited:
                 queue.appendleft(x)
                 # .appendleft从左侧加入数据
                 visited.add(x)

@@ -1,21 +1,20 @@
 def combinationSum(candidates,target) :
     output = []
 
-    def backtrack(sum, target, candidates, res):
-        if sum < target:
-            for i in range(len(candidates)):
-                if sum + candidates[i] >target:
+    def backtrack(nums, res):
+        if sum(res) == target:
+            res.sort()
+            if res not in output:
+                output.append(res)
+            return
+        else:
+            for i in range(len(nums)):
+                if sum(res) + nums[i] <= target:
+                    backtrack(nums, res + [nums[i]])
+                else:
                     return
-                if sum+candidates[i]==target:
-                    tmp=res + [candidates[i]]
-                    tmp.sort()
-                    if tmp not in output:
-                        output.append(res + [candidates[i]])
-                    break
-                backtrack(sum + candidates[i], target, candidates, res + [candidates[i]])
-        return output
 
-    backtrack(0, target, candidates, [])
+    backtrack(candidates, [])
     return output
 
 candidates = [2,3,5]

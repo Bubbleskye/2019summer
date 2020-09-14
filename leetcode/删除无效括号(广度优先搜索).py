@@ -41,13 +41,13 @@ def removeInvalidParentheses(s):
                 # 为字母时候
                 continue
             # 找到所有删除后可能的结果，一个一个删除
-            if tmp_s[i] == "(" and left_p > 0:
+            elif tmp_s[i] == "(" and left_p > 0:
                 # 删除这个括号
                 t = tmp_s[:i] + tmp_s[i + 1:]
                 if (t, left_p - 1, right_p) not in visited:
                     queue.appendleft((t, left_p - 1, right_p))
                     visited.add((t, left_p - 1, right_p))
-            if tmp_s[i] == ")" and right_p > 0:
+            elif tmp_s[i] == ")" and right_p > 0:
                 # 删除这个括号
                 t = tmp_s[:i] + tmp_s[i + 1:]
                 if (t, left_p, right_p - 1) not in visited:

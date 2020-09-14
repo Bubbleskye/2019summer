@@ -5,12 +5,14 @@
 # 注意：此时我们并不能直接返回答案，因为要求的所有最短路径，所以我们要把这一层的所有满足结果都返回。
 #
 def findLadders(beginWord, endWord, wordList) :
+    from collections import deque
     se = set(wordList)
     if endWord not in se:
-        return []
+        return 0
 
     def edges(word):
-        generateword=set()
+        # 遍历找出只改变一个字母的在字典中的所有选择
+        generateword = set()
         arr = list(word)
         for i in range(len(arr)):
             c = arr[i]
@@ -18,35 +20,47 @@ def findLadders(beginWord, endWord, wordList) :
                 arr[i] = chr(j)
                 newWord = ''.join(arr)
                 if newWord in se and newWord not in marked:
+                    # 已经出现过，再回去路径肯定更长
                     generateword.add(newWord)
             arr[i] = c
         return generateword
 
     res = []
     marked = set()
-    queue = [[beginWord]]
+    step = 1
+    # marker记录已经走过的路径
+    queue = deque()
+    queue.append([beginWord])
+    # queue中存的是路径
     while queue:
-        temp = []
-        found = False
-        for wordlist in queue:
-            marked.add(wordlist[-1]) # 每次把出现过的单词放入marked
-        for wordlist in queue:
-            nowword=wordlist[-1]
-            generateword=edges(nowword)
-            for w in generateword:
-                v = wordlist + [w]
-                if w == endWord:
-                    res.append(v)
-                    found = True
-                temp.append(v)
-        if found:  # 找到就不再遍历了，即使再有endWord，路径也会更长
+        step = step + 1
+        flag = False
+        for _ in range(len(queue)):
+            wordlist = queue.popleft()
+            found = False
+            nowword = wordlist[-1]
+            marked.add(nowword)  # 每次把出现过的单词放入marked
+            generateword = edges(nowword)
+            if generateword:
+                flag = True
+                for w in generateword:
+                    if w == endWord:
+                        res.append(wordlist + [w])
+                        found = True
+                    queue.append(wordlist + [w])
+            if found:  # 找到就不再遍历了，即使再有endWord，路径也会更长
+                break
+        if found:
             break
-        queue = temp # temp是到此层为止的路径 不能直接加到queue中的原因是queue中是上一层的状态
-    return res
+        if not flag:
+            return 0
+    if found:
+        return step
+    else:
+        return 0
 
 
-
-beginWord="hit"
-endWord="cog"
-wordList=["hot","dot","tog","cog"]
+beginWord="hot"
+endWord="dog"
+wordList=["hot","dog"]
 print(findLadders(beginWord, endWord, wordList))

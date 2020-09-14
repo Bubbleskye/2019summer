@@ -14,6 +14,8 @@ def characterReplacement(s,k):
         map[index]=map[index]+1
         historymax=max(historymax,map[index])
         if right-left+1>historymax+k:
+            # 不满足，则窗口整个右移
+            # 因为如果仅移动右边，虽然historymax可能会变大+1，但是right-left+1也随之变大+1，随意无法弥补空缺
             map[ord(s[left])-ord('A')]=map[ord(s[left])-ord('A')]-1
             left=left+1
             right=right+1

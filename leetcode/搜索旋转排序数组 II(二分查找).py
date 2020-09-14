@@ -11,15 +11,16 @@ def search(nums, target):
         if nums[mid] == nums[left] == nums[right]:
             left += 1
             right -= 1
-        # 在前部分
+
+        # 前部分是有序的，可以利用二分查找
         elif nums[left] <= nums[mid]:
             if nums[left] <= target < nums[mid]:
                 right = mid - 1
             else:
                 left = mid + 1
 
+        # 后半部分是有序的，可以利用二分查找
         elif nums[right]>=nums[mid]:
-            # 在后半部分
             if nums[mid] < target <= nums[right]:
                 left = mid + 1
             else:

@@ -8,14 +8,24 @@ def subarraysDivByK(A, K):
         return 0
     P = [0]
     for x in A:
-        P.append((P[-1] + x) % K)
+        P.append((P[-1] + x))
     P = P[1:]
-    count = Counter(P)
-    res=0
-    for v in count.values():
-        res=res+v * (v - 1) // 2
-    res=res+count.get(0,0)
+    # print(P)
+    dict = {}
+    res = 0
+    for i in range(len(P)):
+        if P[i] % K == 0:
+            res = res + 1
+            if P[i] % K in dict:
+                res = res + dict[P[i] % K]
+        elif P[i] % K in dict:
+            res = res + dict[P[i] % K]
+        if P[i] % K not in dict:
+            dict[P[i] % K] = 1
+        else:
+            dict[P[i] % K] = dict[P[i] % K] + 1
     return res
+
 A=[4,5,0,-2,-3,1]
 K=5
 print(subarraysDivByK(A, K))

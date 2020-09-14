@@ -41,7 +41,7 @@ class TicTacToe:
             self.angs[player-1][0] =self.angs[player-1][0]+ 1
         if col == self.n-1-row:
             self.angs[player-1][1] =self.angs[player-1][1]+ 1
-        if self.n == max(self.cols[player-1][col], self.rows[player-1][row], max(self.angs[player-1])):
+        if self.n == max(self.cols[player-1][col], self.rows[player-1][row], self.angs[player-1][0], self.angs[player-1][1]):
             return player
         return 0
 

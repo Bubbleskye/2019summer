@@ -3,7 +3,7 @@ class Solution:
     def __init__(self):
         self.dict = {}
         self.res = []
-
+    # 建立Trie树来存储words
     def findWords(self, board, words):
         def insert(word, index):
             tmp = self.dict

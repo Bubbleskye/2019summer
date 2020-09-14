@@ -19,6 +19,7 @@ while right < limit:
         # default -- 如果指定键的值不存在时，返回该默认值。
         if right-left+1 == length:                  # 当窗口大小与目标字符串长度一致时
             if window == needs:
+                # 两个字典相等
                 res.append(left)    # 如果窗口内的各字符数量与目标字符串一致就将left添加到结果中
             window[s[left]] -= 1  # 并将移除的字符数量减一
             left += 1                               # left右移

@@ -27,7 +27,7 @@ def maxCoins(nums):
     #         for i in range(left + 1, right):
     #             dp[left][right] = max(dp[left][right], nums[left] * nums[i] * nums[right] + dp[left][i] + dp[i][right])
     # 因为从小区间才能计算到大区间，所以从末尾开始
-    for left in range(n - 3, -1, -1):
+    for left in range(n - 2, -1, -1):
         for right in range(left + 2, n):
             # 因为 k 是介于 i 与 j 之间的，那么当 i 与 j 相邻时我们的问题将不能再继续划分。所以+2
             for i in range(left + 1, right):

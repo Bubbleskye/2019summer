@@ -9,8 +9,10 @@ def subarraySum(nums, k) :
 
     res = 0
     dict = {}
+    # 一次遍历
     for i in range(len(P)):
         if P[i] - k in dict.keys():
+            # p[后]-p[前]=k
             res = res + dict[P[i] - k]
         if P[i] ==k:
             res=res+1

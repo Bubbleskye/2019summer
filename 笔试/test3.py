@@ -1,4 +1,4 @@
-P=int(input())
+
 N=int(input())
 
 def findpossible(words,m):
