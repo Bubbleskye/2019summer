@@ -1,15 +1,7 @@
-def GetFragment(str):
-    LEN = len(arr)
-    SUM = [0]
-    for i in range(LEN):
-        SUM.append(SUM[i] + arr[i])
-    res = k
-    for i in range(LEN):
-        if i + res > LEN:
-            break
-        for j in range(i + res, LEN + 1):
-            if SUM[j] - SUM[i] + k < j - i:
-                break
-            if SUM[j] - SUM[i] + k >= j - i:
-                res = max(res, j - i)
-    return res
+T=int(input())
+for _ in range(T):
+    N,M=map(int, input().split())
+    if N%2==0 or M%2==0:
+        print("1/2")
+    else:
+        print(str(int((N*M-1)/2))+"/"+str(int(N*M)))

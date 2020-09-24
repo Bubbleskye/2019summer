@@ -17,16 +17,18 @@ def maximalRectangle(matrix):
     row = len(matrix)
     col = len(matrix[0])
     res = 0
+    # 获得以第i行为底的柱状图(连续的1)的高度
     for i in range(row):
+        # rec中存储柱状图的高度
         rec = []
         for j in range(col):
             if matrix[i][j] == "1":
                 k = i
-                s = 0
+                height = 0
                 while k >= 0 and matrix[k][j] == "1":
-                    s = s + int(matrix[k][j])
+                    height = height + 1
                     k = k - 1
-                rec.append(s)
+                rec.append(height)
             else:
                 rec.append(0)
         # print(rec)

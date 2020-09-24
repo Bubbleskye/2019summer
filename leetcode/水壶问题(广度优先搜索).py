@@ -1,11 +1,13 @@
 def canMeasureWater( x, y, z):
-    # 深度优先搜索
-    stack = [(0, 0)]
+    # 广度优先搜索
+    from collections import deque
+    stack=deque()
+    stack.append((0, 0))
     # x/y中的水量
     seen = set()
     # 存储已经有过的状态
     while stack:
-        remain_x, remain_y = stack.pop()
+        remain_x, remain_y = stack.popleft()
         if remain_x == z or remain_y == z or remain_x + remain_y == z:
             return True
         if (remain_x, remain_y) in seen:

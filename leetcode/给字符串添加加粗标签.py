@@ -3,25 +3,28 @@ def addBoldTag(s, dict):
     for d in dict:
         left = 0
         while True:
+            # 通过循环找到d的所有位置索引
             loc = s.find(d, left)
             if loc == -1:
                 break
             for i in range(loc, loc + len(d)):
-                lookup.add(i)
+                if i not in lookup:
+                    lookup.add(i)
             left = loc + 1
     # lookup统计出字典中字符在s中的索引位置
     res = ""
     i = 0
     while i < len(s):
-        left = i
+        left=i
         while i < len(s) and i in lookup:
             i = i + 1
         if left == i:
+            # 即i处字符不在dict中
             res = res + s[i]
             i = i + 1
-        #     即i处字符不在dict中
+
         else:
-            res += "<b>"
+            res = res + "<b>"
             for j in range(left, i):
                 res = res + s[j]
             res = res + "</b>"

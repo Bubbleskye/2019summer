@@ -22,7 +22,7 @@ def longestPalindrome(s):
     maxl = 0
     dp = [[False for _ in range(len(s))] for _ in range(len(s))]
     for j in range(len(s)):
-        for i in range(0, j + 1, 1):
+        for i in range(j, -1, -1):
             if i == j:
                 dp[i][j] = True
                 if j - i + 1 > maxl:

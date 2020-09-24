@@ -26,6 +26,7 @@ def equationsPossible(equations):
                 key1=abcs[first]
                 key2=abcs[end]
                 for i in range(len(abcs)):
+                    # 将之前于first和end连接的一并都改成新的值
                     if abcs[i]==key1 or abcs[i]==key2:
                         abcs[i]=value
 

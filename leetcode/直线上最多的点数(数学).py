@@ -2,10 +2,13 @@ points=[[0,0],[94911151,94911150],[94911152,94911151]]
 if not points:
     print(0)
 res = 0
-from collections import Counter
-# 一个Counter是dict子类，元素被作为字典的key存储，它们的计数作为字典的value存储。
+points_dict={}
 # 所有点统计
-points_dict = Counter(tuple(point) for point in points)
+for point in points:
+    if tuple(point) not in points_dict:
+        points_dict[tuple(point)]=1
+    else:
+        points_dict[tuple(point)] = points_dict[tuple(point)] + 1
 # 把唯一点列举出来
 points = list(points_dict.keys())
 

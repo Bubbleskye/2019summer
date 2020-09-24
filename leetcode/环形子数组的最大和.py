@@ -14,17 +14,11 @@ def maxSubarraySumCircular(A):
     for i in range(1, len(A)):
         if A[i] >= 0:
             find = True
-        if bigdp[i - 1] + A[i] > A[i]:
-            bigdp[i] = bigdp[i - 1] + A[i]
-        else:
-            bigdp[i] = A[i]
-        if smalldp[i - 1] + A[i] < A[i]:
-            smalldp[i] = smalldp[i - 1] + A[i]
-        else:
-            smalldp[i] = A[i]
+        bigdp[i] = max(bigdp[i - 1] + A[i], A[i])
+        smalldp[i] = min(smalldp[i - 1] + A[i],A[i])
 
     if find:
         return max(max(bigdp), sum(A) - min(smalldp))
     else:
-        # 如果数组全为负
+        # 如果数组全为负,则越加越小,所以直接选择最大的数
         return max(A)

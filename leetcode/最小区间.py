@@ -15,7 +15,9 @@ def smallestRange(nums):
     n = len(nums)
     mi = float('inf')
     ma = float('-inf')
+    # 初始化堆
     for i in range(n):
+        # 堆中元组(值，第几个元素，第几个列表)
         heapq.heappush(heap, (nums[i][0], 0, i))
         # 第i个列表的第0个值
         mi = min(mi, nums[i][0])
@@ -25,10 +27,12 @@ def smallestRange(nums):
     while True:
         small, smallindex, smalllist = heapq.heappop(heap)
         if smallindex == len(nums[smalllist]) - 1:
+            # 列表中已经没有元素，break出
             break
         heapq.heappush(heap, (nums[smalllist][smallindex + 1], smallindex + 1, smalllist))
         ma = max(ma, nums[smalllist][smallindex + 1])
         mi = heap[0][0]
+        # 最小堆的顶部元素heap[0]一定是最小的
         if ma - mi < res[1] - res[0]:
             res = [mi, ma]
         elif ma - mi == res[1] - res[0] and mi < res[0]:

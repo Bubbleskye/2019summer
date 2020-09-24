@@ -22,3 +22,16 @@ def increasingTriplet(nums):
 # 在次小值和最小值之间，此时更新次小值，这时候更新前的次小值就没有用了，因为要满足顺序。
 nums=[0,0,0,0,10,0,0,0,1000]
 print(increasingTriplet(nums))
+
+# 最长递增子序列
+#     if len(nums) < 3:
+#         return False
+#     dp = [1 for _ in range(len(nums))]
+#     for i in range(len(nums)):
+#         for j in range(0, i):
+#             if nums[i] > nums[j]:
+#                 dp[i] = max(dp[j] + 1, dp[i])
+#     if 3 in dp:
+#         return True
+#     else:
+#         return False

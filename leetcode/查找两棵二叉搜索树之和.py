@@ -20,6 +20,7 @@ class Solution:
         if not root1 or not root2:
             return False
 
+        # 先序遍历第一棵树，找到相对于target，此时另一个值，存入self.res
         def preorder(root, target):
             if not root:
                 return self.res
@@ -29,6 +30,7 @@ class Solution:
 
         preorder(root1, target)
 
+        # 先序遍历第二棵树，是否值在self.res中
         def preorder2(root):
             if not root:
                 return

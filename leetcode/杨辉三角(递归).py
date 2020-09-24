@@ -8,7 +8,7 @@ def generate(numRows):
     else:
         last = generate(numRows - 1)
         # print(last[numRows-2])
-        lastlayer = last[numRows - 2]
+        lastlayer = last[-1]
         newlayer = [1]
         for i in range(len(lastlayer) - 1):
             newlayer.append(lastlayer[i] + lastlayer[i + 1])

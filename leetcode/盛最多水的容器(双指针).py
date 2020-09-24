@@ -1,4 +1,7 @@
-def maxArea(self, height: List[int]) -> int:
+# 双指针
+# 水量等于长的最小值*宽
+# 随着从两边向内缩，长肯定是越来越小的，所以我们要去找宽变大的方向
+def maxArea(height):
     left = 0
     right = len(height) - 1
     Area = 0
@@ -9,5 +12,3 @@ def maxArea(self, height: List[int]) -> int:
         else:
             right = right - 1
     return Area
-
-# 双指针，随着从两边向内缩，长肯定是越来越小的，所以我们要去找宽变大的方向
